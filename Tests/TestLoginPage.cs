@@ -8,7 +8,8 @@ namespace M7_Dzianis_Dukhnou
         [Test]
         public void Login()
         {
-            Assert.IsTrue(_homePage.FindAccountIconByAccountName());
+            Assert.IsTrue(_homePage.FindAccountIconByAccountName(),
+               "The login is not successful. Account Name has not been found!");
         }
     }
 }

@@ -27,31 +27,35 @@ namespace M7_Dzianis_Dukhnou
         [Test]
         public void SendingDraftEmail_CheckDraftFolder()
         {
+            //Arrange
             _letterPage = _homePage.CreateNewLetter();
             _letterPage.PopulateEmail(emailTo, subject, message);
-
             _draftPage = _homePage.OpenDraftLetters();
+
+            //Act
             _letterPage = _draftPage.OpenLetterByOrder(1);
             _homePage = _letterPage.ClickSend();
 
+            //Assert
             _draftPage = _homePage.OpenDraftLetters();
-
-            Assert.IsFalse(_draftPage.FindLetterBySubject(subject));
+            Assert.IsFalse(_draftPage.FindLetterBySubject(subject), "The letter is still in the draft folder");
         }
 
         [Test]
         public void SendingDraftEmail_CheckSentFolder()
         {
+            //Arrange
             _letterPage = _homePage.CreateNewLetter();
             _letterPage.PopulateEmail(emailTo, subject, message);
-
             _draftPage = _homePage.OpenDraftLetters();
+
+            //Act
             _letterPage = _draftPage.OpenLetterByOrder(1);
             _homePage = _letterPage.ClickSend();
 
+            //Assert
             _sentPage = _homePage.OpenSentLetters();
-
-            Assert.IsTrue(_draftPage.FindLetterBySubject(subject));
+            Assert.IsTrue(_draftPage.FindLetterBySubject(subject), "The letter is not in the Sent Folder");
         }
     }
 }

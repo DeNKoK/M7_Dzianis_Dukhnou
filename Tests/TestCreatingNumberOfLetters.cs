@@ -26,14 +26,14 @@ namespace M7_Dzianis_Dukhnou
         [TestCase(15)]
         public void CreatingNumberOfDraftLetters(int number)
         {
+            //Act
             _homePage.CreateNumberOfDraftLetters(number, emailTo, subject, message);
-
             _draftPage = _homePage.OpenDraftLetters();
-
             _rightClickMenuPage = _draftPage.RightClick(10);
             _draftPage = _rightClickMenuPage.Delete();
 
-            Assert.AreEqual(number - 1, _draftPage.CountDraftLetters());
+            //Assert
+            Assert.AreEqual(number - 1, _draftPage.CountDraftLetters(), "The expected and actual results are not equal");
         }
     }
 }

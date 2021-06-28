@@ -20,14 +20,17 @@ namespace M7_Dzianis_Dukhnou
         [Test]
         public void MoveLetterFromDraftToInput()
         {
+            //Arrange
             _letterPage = _homePage.CreateNewLetter();
             _letterPage.PopulateEmail(emailTo, subject, message);
 
+            //Act
             _draftPage = _homePage.OpenDraftLetters();
             _rightClickMenuPage = _draftPage.RightClick(1);
             _rightClickMenuPage.MoveToInputFolder();
 
-            Assert.IsFalse(_draftPage.FindLetterBySubject(subject));
+            //Assert
+            Assert.IsFalse(_draftPage.FindLetterBySubject(subject), "The Letter is still in the draft folder");
         }
     }
 }

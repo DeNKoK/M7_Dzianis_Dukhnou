@@ -1,7 +1,4 @@
-using M7_Dzianis_Dukhnou.WebObjects;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using System.Threading;
 
 namespace M7_Dzianis_Dukhnou
 {
@@ -30,26 +27,29 @@ namespace M7_Dzianis_Dukhnou
         [Test]
         public void CreatingDraftEmail_VerifyDarftFolder()
         {
+            //Act
             _letterPage = _homePage.CreateNewLetter();
             _letterPage.PopulateEmail(emailTo, subject, message);
 
+            //Assert
             _draftPage = _homePage.OpenDraftLetters();
-
-            Assert.IsTrue(_draftPage.FindLetterBySubject(subject));
+            Assert.IsTrue(_draftPage.FindLetterBySubject(subject), "The letter is not in the draft folder");
         }
 
         [Test]
         public void CreatingDraftEmail_VerifyContent()
         {
+            //Act
             _letterPage = _homePage.CreateNewLetter();
             _letterPage.PopulateEmail(emailTo, subject, message);
 
+            //Assert
             _draftPage = _homePage.OpenDraftLetters();
             _letterPage = _draftPage.OpenLetterByOrder(1);
 
-            Assert.AreEqual(emailTo, _letterPage.GetToField());
-            Assert.AreEqual(subject, _letterPage.GetSubjectField());
-            Assert.AreEqual(message, _letterPage.GetMessageField());
+            Assert.AreEqual(emailTo, _letterPage.GetToField(), $"The Field TO doesn't have <{emailTo}>");
+            Assert.AreEqual(subject, _letterPage.GetSubjectField(), $"The Field Subject doesn't have <{subject}>");
+            Assert.AreEqual(message, _letterPage.GetMessageField(), $"The Field Message doesn't have <{message}>");
         }
     }
 }

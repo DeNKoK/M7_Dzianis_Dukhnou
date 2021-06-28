@@ -12,10 +12,10 @@ namespace M7_Dzianis_Dukhnou.WebObjects
         {
             _titleLocator = TitleLocator;
             _title = _titleForm = title;
-            AssertIsOpen();
+            WaitIsOpen();
         }
 
-        public void AssertIsOpen()
+        public void WaitIsOpen()
         {
             var label = new BaseElement(_titleLocator);
             label.WaitForIsVisible();
